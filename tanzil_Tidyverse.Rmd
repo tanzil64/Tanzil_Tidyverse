@@ -1,12 +1,13 @@
 ---
-title: "Chess Transfers Data Analysis with Tidyverse"
-author: "Tanjil"
+title: "Tanzil Tidyverse"
+author: "Md. Tanzil Ehsan"
 date: "`r Sys.Date()`"
-output: html_document
+output: openintro::lab_report
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r load-packages, message=FALSE}
+library(tidyverse)
+library(openintro)
 ```
 
 
@@ -37,7 +38,7 @@ I was looking for a simple dataset with count data for chess players transfer to
 library(readr)
 
 # Option 1: Double backslashes
-chess_df <- read_csv("C:\\Users\\tanzi\\OneDrive\\DATA\\607\\Extra Credit\\Tiddyverse\\Tidyverse\\chess_transfers.csv")
+chess_df <- read_csv('https://raw.githubusercontent.com/tanzil64/Tanzil_Tidyverse/refs/heads/main/chess_transfers.csv')
 
 # Preview the data
 #glimpse(chess_df)
@@ -91,10 +92,10 @@ ggplot(transfers_per_year, aes(x = transfer_year, y = n)) +
 ```{r}
 # Count transfers out by 'form_fed' and select top 10
 top_federations <- chess_df %>%
-  count(Form.Fed, sort = TRUE) %>%
+  count(form_fed, sort = TRUE) %>%
   slice_max(n, n = 10)
 
-ggplot(top_federations, aes(x = reorder(Form.Fed, n), y = n)) +
+ggplot(top_federations, aes(x = reorder(form_fed, n), y = n)) +
   geom_bar(stat = "identity", fill = "steelblue") +
   coord_flip() +
   labs(title = "Top 10 Federations by Transfers Out",
@@ -157,4 +158,5 @@ chess_df %>%
         plot.subtitle = element_text(size = 14, color = "gold")) +
   coord_flip()
 ```
+
 
